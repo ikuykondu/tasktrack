@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตารางเรียน ม.5 ของฉัน</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ตารางเรียนและกิจกรรม ม.5</h1>
+            <p id="statusText">กำลังโหลดข้อมูล...</p>
+        </header>
+
+        <!-- ตั้งค่าการเชื่อมต่อ Google Sheets -->
+        <div class="sync-box">
+            <input type="text" id="scriptUrlInput" placeholder="วาง Google Apps Script Web App URL ที่นี่...">
+            <button id="saveUrlBtn">เชื่อมต่อชีท</button>
+        </div>
+
+        <!-- แถบแสดงชั่วโมงสะสม -->
+        <div class="summary-card">
+            <div class="summary-info">
+                <span>ชั่วโมงสะสม: <strong id="completedHours">0.0 ชม.</strong></span>
+                <span>เป้าหมาย: <strong id="targetHours">24 ชม.</strong></span>
+            </div>
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- ตัวกรองระดับชั้น ม.5 -->
+        <div class="filter-container">
+            <div class="filter-label">ระดับการเรียน</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active">ม.5</button>
+            </div>
+        </div>
+
+        <!-- ตารางเรียนหลัก -->
+        <div class="table-responsive">
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>เวลา / วัน</th>
+                        <th>จันทร์</th>
+                        <th>อังคาร</th>
+                        <th>พุธ</th>
+                        <th>พฤหัสบดี</th>
+                        <th>ศุกร์</th>
+                        <th>เสาร์</th>
+                        <th>อาทิตย์</th>
+                    </tr>
+                </thead>
+                <tbody id="timetableBody">
+                    <!-- ข้อมูลจะถูกเรนเดอร์ด้วย JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ฟอร์มเพิ่ม/แก้ไขวิชา -->
+        <div class="form-card">
+            <h3 id="formTitle"> เพิ่มวิชา / กิจกรรม ม.5</h3>
+            <form id="classForm">
+                <input type="hidden" id="editClassId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>วัน:</label>
+                        <select id="classDay" required>
+                            <option value="Mon">วันจันทร์</option>
+                            <option value="Tue">วันอังคาร</option>
+                            <option value="Wed">วันพุธ</option>
+                            <option value="Thu">วันพฤหัสบดี</option>
+                            <option value="Fri">วันศุกร์</option>
+                            <option value="Sat">วันเสาร์</option>
+                            <option value="Sun">วันอาทิตย์</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ช่วงเวลา:</label>
+                        <select id="classTime" required>
+                            <option value="08:00 - 10:00">08:00 - 10:00</option>
+                            <option value="10:00 - 12:00">10:00 - 12:00</option>
+                            <option value="12:00 - 13:00">12:00 - 13:00</option>
+                            <option value="13:00 - 15:00">13:00 - 15:00</option>
+                            <option value="15:00 - 17:00">15:00 - 17:00</option>
+                            <option value="17:00 - 19:00">17:00 - 19:00</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ชื่อวิชา:</label>
+                        <input type="text" id="className" placeholder="เช่น เคมี ม.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>หัวข้อย่อย:</label>
+                        <input type="text" id="classTopic" placeholder="เช่น อะตอมและตารางธาตุ">
+                    </div>
+                    <div class="form-group">
+                        <label>จำนวนชั่วโมง:</label>
+                        <input type="number" id="classDuration" step="0.5" value="2" min="0.5" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="btn-primary">บันทึกวิชาเรียน</button>
+                    <button type="button" id="cancelEditBtn" class="btn-secondary" style="display:none;">ยกเลิก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

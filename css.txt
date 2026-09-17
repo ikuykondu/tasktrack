@@ -1,0 +1,320 @@
+/* การตั้งค่าพื้นฐานและฟอนต์ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #334155;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ส่วนหัวของเว็บ */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #1e293b;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+#statusText {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* กล่องตั้งค่าการเชื่อมต่อ Google Sheets */
+.sync-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.sync-box input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.sync-box button {
+    padding: 8px 16px;
+    background-color: #0284c7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sync-box button:hover {
+    background-color: #0369a1;
+}
+
+/* การ์ดแสดงชั่วโมงสะสม (Progress Bar) */
+.summary-card {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.summary-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #10b981;
+    transition: width 0.4s ease;
+}
+
+/* ส่วนตัวกรองระดับชั้น */
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    background-color: #d97706;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* ตารางเรียนหลัก */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 900px;
+}
+
+.timetable th, .timetable td {
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.timetable th {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.time-cell {
+    background-color: #f8fafc;
+    font-weight: bold;
+    font-size: 13px;
+    color: #475569;
+    white-space: nowrap;
+    width: 110px;
+}
+
+.empty-cell {
+    color: #cbd5e1;
+    font-size: 16px;
+}
+
+/* การ์ดวิชาเรียนภายในตาราง */
+.class-card {
+    background-color: #fef3c7;
+    border-left: 4px solid #d97706;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: left;
+    margin-bottom: 6px;
+    font-size: 12px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.class-card:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.class-card.completed {
+    background-color: #d1fae5;
+    border-left-color: #10b981;
+    opacity: 0.75;
+}
+
+.class-card.completed label {
+    text-decoration: line-through;
+    color: #065f46;
+}
+
+.class-card label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: #78350f;
+}
+
+.class-card .topic {
+    color: #475569;
+    margin: 3px 0;
+    font-size: 11px;
+}
+
+.class-card .dur {
+    color: #64748b;
+    font-size: 10px;
+}
+
+/* ปุ่มจัดการในการ์ดวิชา (แก้ไข/ลบ) */
+.card-actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+    gap: 3px;
+}
+
+.class-card:hover .card-actions {
+    display: flex;
+}
+
+.card-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 1px 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.card-actions button:hover {
+    background: #fff;
+}
+
+/* ฟอร์มเพิ่ม/แก้ไขวิชาเรียน */
+.form-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-card h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #475569;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-primary {
+    padding: 9px 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    padding: 9px 20px;
+    background-color: #64748b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #475569;
+}
